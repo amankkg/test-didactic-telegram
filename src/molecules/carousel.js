@@ -6,42 +6,43 @@ import {Button} from '../atoms/button'
 
 import {nextIndex, prevIndex} from './carousel-utils'
 
-const Carousel = props => {
+// TODO: handle bullet indicator click
+// TODO: reset timer on manual navigation?
+// TODO: add nocycling prop or check if timeout is 0?
+const Carousel = ({ images, interval }) => {
     const [activeIndex, setActiveIndex] = useState(0)
 
-    const setPrevCallback = useCallback(() => setActiveIndex(prevIndex(props.images.length)), [props.images])
-    const setNextCallback = useCallback(() => setActiveIndex(nextIndex(props.images.length)), [props.images])
+    const setPrevCallback = useCallback(() => setActiveIndex(prevIndex(images.length)), [images])
+    const setNextCallback = useCallback(() => setActiveIndex(nextIndex(images.length)), [images])
 
-    // TODO: reset timer on manual navigation?
     useEffect(() => {
-        const intervalHandler = setInterval(setNextCallback, props.interval)
+        const intervalHandler = setInterval(setNextCallback, interval)
 
         return () => clearInterval(intervalHandler)
     }, [])
 
-    // TODO: allow cycling? add nocycling prop?
-    const first = props.images.length === 1
-    const latest = props.images.length === 1
-
-    const activeItem = props.images[activeIndex]
+    const activeImage = images[activeIndex]
 
     return (
         <div>
-            <img src={activeItem} alt={activeItem} />
-            <Button direction="prev" onClick={setPrevCallback} disabled={first} />
-            {props.images.map((item, index) => /* TODO: revise key usage */ <Bullet key={item} active={index === activeIndex} />)}
-            <Button direction="next" onClick={setNextCallback} disabled={latest} />
+            <img src={activeImage.url} alt={activeImage.note} />
+            <Button direction="prev" onClick={setPrevCallback} />
+            <Button direction="next" onClick={setNextCallback} />
+            {images.map(({url}, index) => <Bullet key={index + url} active={index === activeIndex} />)}
         </div>
     )
 }
 
 Carousel.propTypes = {
-    images: PropTypes.arrayOf(PropTypes.string).isRequired, // TODO: should it be image blobs or urls?
-    interval: PropTypes.number, // ms, 0 - auto-rotate is OFF, > 0 - auto-rotate is ON?
+    images: PropTypes.arrayOf(PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        note: PropTypes.string,
+    })).isRequired,
+    interval: PropTypes.number,
 }
 
 Carousel.defaultProps = {
-    interval: 3000, // ms, default is auto-rotate is ON and timeout is 3 seconds
+    interval: 3000,
 }
 
 export { Carousel }
