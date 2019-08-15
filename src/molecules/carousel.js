@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
-import {Bullet} from '../atoms/bullet'
 import {Button} from '../atoms/button'
+import {nextIndex, prevIndex} from '../misc-fns'
+import {IndicatorBar} from './indicator-bar'
 
-import {nextIndex, prevIndex} from './carousel-utils'
-
-// TODO: handle bullet indicator click
 // TODO: reset timer on manual navigation?
 // TODO: add nocycling prop or check if timeout is 0?
 const Carousel = ({ images, interval }) => {
     const [activeIndex, setActiveIndex] = useState(0)
 
+    const setActiveNumber = useCallback(number => setActiveIndex(number - 1), [])
+    // it is expected to images prop to change rarely, not as activeIndex
+    // so, we *can save some bits* by memoizing prev/next callbacks
+    // (but in real world we *shouldn't* until metrics or actual performance issues say opposite)
     const setPrevCallback = useCallback(() => setActiveIndex(prevIndex(images.length)), [images])
     const setNextCallback = useCallback(() => setActiveIndex(nextIndex(images.length)), [images])
 
@@ -28,7 +30,7 @@ const Carousel = ({ images, interval }) => {
             <img src={activeImage.url} alt={activeImage.note} />
             <Button direction="prev" onClick={setPrevCallback} />
             <Button direction="next" onClick={setNextCallback} />
-            {images.map(({url}, index) => <Bullet key={index + url} active={index === activeIndex} />)}
+            <IndicatorBar total={images.length} active={activeIndex + 1} onClick={setActiveNumber} />
         </div>
     )
 }

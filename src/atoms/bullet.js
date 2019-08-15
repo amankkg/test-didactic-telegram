@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Bullet = props => <span>{props.active ? '+' : '-'}</span>
+const Bullet = props => <button onClick={props.onClick}>{props.active ? '+' : '-'}</button>
 
 Bullet.propTypes = {
     active: PropTypes.bool,
+    onClick: PropTypes.func,
 }
 
 Bullet.defaultProps = {
