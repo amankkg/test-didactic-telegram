@@ -9,12 +9,13 @@ import {nextIndex, prevIndex} from './carousel-utils'
 const Carousel = props => {
     const [activeIndex, setActiveIndex] = useState(0)
 
-    // TODO: memoize?
+    // TODO: memoize? useCallback?
     const prevFrom = prevIndex(props.images.length)
     const nextFrom = nextIndex(props.images.length)
     const setPrev = () => setActiveIndex(prevFrom(activeIndex))
     const setNext = () => setActiveIndex(nextFrom(activeIndex))
 
+    // TODO: allow cycling? add nocycling prop?
     const first = props.images.length === 1
     const latest = props.images.length === 1
 
@@ -22,7 +23,7 @@ const Carousel = props => {
 
     return (
         <div>
-            <p>{activeItem}</p>
+            <img src={activeItem} alt={activeItem} />
             <Button direction="prev" onClick={setPrev} disabled={first} />
             {props.images.map((item, index) => /* TODO: revise key usage */ <Bullet key={item} active={index === activeIndex} />)}
             <Button direction="next" onClick={setNext} disabled={latest} />
