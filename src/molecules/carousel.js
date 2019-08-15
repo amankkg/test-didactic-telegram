@@ -4,16 +4,19 @@ import PropTypes from 'prop-types'
 import {Bullet} from '../atoms/bullet'
 import {Button} from '../atoms/button'
 
+import {nextIndex, prevIndex} from './carousel-utils'
+
 const Carousel = props => {
     const [activeIndex, setActiveIndex] = useState(0)
 
     // TODO: memoize?
-    const setPrev = () => setActiveIndex(activeIndex - 1)
-    const setNext = () => setActiveIndex(activeIndex + 1)
+    const prevFrom = prevIndex(props.images.length)
+    const nextFrom = nextIndex(props.images.length)
+    const setPrev = () => setActiveIndex(prevFrom(activeIndex))
+    const setNext = () => setActiveIndex(nextFrom(activeIndex))
 
-    // TODO: allow cycling?
-    const first = activeIndex === 0
-    const latest = activeIndex === props.images.length - 1
+    const first = props.images.length === 1
+    const latest = props.images.length === 1
 
     const activeItem = props.images[activeIndex]
 
