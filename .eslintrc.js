@@ -7,4 +7,7 @@ module.exports = {
     'prettier/react',
     'prettier/unicorn',
   ],
+  rules: {
+    'unicorn/prevent-abbreviations': 'warn',
+  },
 }

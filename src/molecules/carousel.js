@@ -13,7 +13,7 @@ const Carousel = ({images, interval}) => {
   const setActiveNumber = useCallback(number => setActiveIndex(number - 1), [])
   // it is expected to images prop to change rarely, not as activeIndex
   // so, we can save some bits by memoizing prev/next callbacks, IMO this is premature now
-  const setPrevCallback = useCallback(
+  const setPreviousCallback = useCallback(
     () => setActiveIndex(previousIndex(images.length)),
     [images],
   )
@@ -33,7 +33,7 @@ const Carousel = ({images, interval}) => {
   return (
     <div>
       <img src={activeImage.url} alt={activeImage.note} />
-      <Button direction="prev" onClick={setPrevCallback} />
+      <Button direction="prev" onClick={setPreviousCallback} />
       <Button direction="next" onClick={setNextCallback} />
       <IndicatorBar
         total={images.length}
