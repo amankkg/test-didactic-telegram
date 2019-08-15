@@ -1,4 +1,4 @@
-import {nextIndex,prevIndex} from './carousel-utils'
+import {nextIndex,prevIndex, getNumbersArray} from './misc-fns'
 
 // TODO: add some edge cases and exceptions?
 describe('when total length is >1', () => {
@@ -33,6 +33,21 @@ describe('when total length is >1', () => {
             const actual = prevFrom(1)
 
             expect(actual).toBe(0)
+        })
+    })
+
+    describe('getNumbersArray', () => {
+        it('should return array with exact length', () => {
+            const actual = getNumbersArray(totalLength)
+
+            expect(actual.length).toBe(totalLength)
+        })
+
+        it('should return array with same starting and ending', () => {
+            const actual = getNumbersArray(totalLength)
+
+            expect(actual[0]).toBe(1)
+            expect(actual[totalLength - 1]).toBe(totalLength)
         })
     })
 })

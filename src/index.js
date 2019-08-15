@@ -3,8 +3,6 @@ import { render } from 'react-dom'
 
 import { Carousel } from './molecules/carousel'
 
-const rootEl = document.querySelector('#root')
-
 const httpCats = [
     {
         url: 'https://http.cat/400',
@@ -29,4 +27,4 @@ render((
         <h1>HTTP Cats</h1>
         <Carousel images={httpCats} interval={1337} />
     </>
-), rootEl)
+), document.querySelector('#root'))

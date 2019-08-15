@@ -1,6 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 
-it.todo('renders just OK', () => {
-    expect(true).toBe(false)
+import { render } from 'test-utils';
+
+describe('app', () => {
+    it.todo('should just render OK')
+
+    it.todo('should be cool on some props change')
 })
