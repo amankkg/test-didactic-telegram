@@ -4,15 +4,15 @@
 
 // TODO: handle exception cases?
 export const nextIndex = length => currentIndex => {
-    if (currentIndex === length - 1) return 0
+  if (currentIndex === length - 1) return 0
 
-    return currentIndex + 1
+  return currentIndex + 1
 }
 
-export const prevIndex = length => currentIndex => {
-    if (currentIndex === 0) return length - 1
+export const previousIndex = length => currentIndex => {
+  if (currentIndex === 0) return length - 1
 
-    return currentIndex - 1
+  return currentIndex - 1
 }
 
 // we want to deal with numbers (1 .. total) not indices (0 .. total-1)
