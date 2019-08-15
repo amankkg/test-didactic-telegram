@@ -7,17 +7,24 @@
     "test": "jest --watch"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^9.1.1",
+    "babel-jest": "^24.8.0",
+    "jest": "^24.8.0",
     "parcel": "^1.12.3"
   },
   "dependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "babel-jest": "^24.8.0",
-    "jest": "^24.8.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "."
+    ]
   }
 }

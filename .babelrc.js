@@ -1,3 +1,4 @@
 module.exports = {
-    presets: ['@babel/preset-env']
+    // jest needs this, not parcel
+    presets: ['@babel/preset-env', "@babel/preset-react"]
 }
