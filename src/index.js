@@ -5,4 +5,6 @@ import { Carousel } from './molecules/carousel'
 
 const rootEl = document.querySelector('#root')
 
-render(<Carousel />, rootEl)
+const images = ['foo', 'bar', 'baz']
+
+render(<Carousel images={images} />, rootEl)
