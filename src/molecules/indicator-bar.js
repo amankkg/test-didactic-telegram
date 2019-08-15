@@ -6,7 +6,6 @@ import {Bullet} from '../atoms/bullet'
 
 const IndicatorBar = ({total, active, onClick}) => {
     // we can save on numbers array creation since it is expected to `total` prop to change not so frequently
-    // plus, we want to deal with numbers (1 .. total) not indices (0 .. total-1)
     const numbers = useMemo(() => getNumbersArray(total), [total])
 
     return (

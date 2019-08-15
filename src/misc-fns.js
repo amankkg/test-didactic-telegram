@@ -15,4 +15,6 @@ export const prevIndex = length => currentIndex => {
     return currentIndex - 1
 }
 
+// we want to deal with numbers (1 .. total) not indices (0 .. total-1)
+// also, this is a way to prevent react's array-index-as-a-key warning
 export const getNumbersArray = length => Array.from({length}, (_, i) => i + 1)
