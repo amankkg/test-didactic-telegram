@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import {getNumbersArray} from '../misc-fns'
 import {Bullet} from '../atoms/bullet'
 
-const IndicatorBar = ({total, active, onClick}) => {
+const IndicatorBar = ({total, active, onClick, ...divProps}) => {
   // we can save on array creation since it is expected to `total` prop to change not so frequently
   const numbers = useMemo(() => getNumbersArray(total), [total])
 
   return (
-    <div>
+    <div {...divProps}>
       {numbers.map(n => (
         <Bullet key={n} onClick={() => onClick(n)} active={active === n} />
       ))}
