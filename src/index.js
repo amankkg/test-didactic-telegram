@@ -1,7 +1,9 @@
 import React from 'react'
 import {render} from 'react-dom'
+import {styled} from 'linaria/react'
 
-import {Carousel} from './molecules/carousel'
+import {Hr} from './atoms/hr'
+import {Carousel} from './organisms/carousel'
 
 // TODO: use https://picsum.photos/
 const httpCats = [
@@ -23,7 +25,17 @@ const httpCats = [
   },
 ]
 
+const Root = styled.div`
+  & > * {
+    max-width: 980px;
+    max-height: 460px;
+  }
+`
+
 render(
-  <Carousel images={httpCats} interval={1337} />,
+  <Root>
+    <Carousel images={httpCats} interval={1337} />
+    <Hr />
+  </Root>,
   document.querySelector('#root'),
 )
