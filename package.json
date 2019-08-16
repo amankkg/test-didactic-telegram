@@ -4,14 +4,16 @@
   "scripts": {
     "start": "parcel index.html -p 3000",
     "build": "parcel build index.html",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "lint:js": "eslint src/**/*.js",
+    "lint:css": "stylelint src/**/*.js"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "@testing-library/jest-dom": "^4.0.0",
-    "@testing-library/react": "^9.1.1",
+    "@testing-library/react": "^9.1.2",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
     "eslint": "^6.1.0",
@@ -23,12 +25,47 @@
     "jest": "^24.8.0",
     "parcel": "^1.12.3",
     "prettier": "^1.18.2",
-    "pretty-quick": "^1.11.1"
+    "pretty-quick": "^1.11.1",
+    "stylelint": "^10.1.0",
+    "stylelint-config-recommended": "^2.2.0"
   },
   "dependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": false
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "plugin:unicorn/recommended",
+      "plugin:prettier/recommended",
+      "prettier/babel",
+      "prettier/react",
+      "prettier/unicorn"
+    ],
+    "rules": {
+      "unicorn/prevent-abbreviations": "off"
+    }
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-recommended",
+    ]
   },
   "jest": {
     "moduleDirectories": [

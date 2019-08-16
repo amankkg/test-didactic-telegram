@@ -5,7 +5,7 @@ import {getNumbersArray} from '../misc-fns'
 import {Bullet} from '../atoms/bullet'
 
 const IndicatorBar = ({total, active, onClick}) => {
-  // we can save on numbers array creation since it is expected to `total` prop to change not so frequently
+  // we can save on array creation since it is expected to `total` prop to change not so frequently
   const numbers = useMemo(() => getNumbersArray(total), [total])
 
   return (

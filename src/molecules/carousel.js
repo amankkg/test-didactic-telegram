@@ -5,14 +5,15 @@ import {Button} from '../atoms/button'
 import {nextIndex, previousIndex} from '../misc-fns'
 import {IndicatorBar} from './indicator-bar'
 
+// TODO: add animation
 // TODO: reset timer on manual navigation? should be easier with external state manager (i.e. effector)
-// TODO: add nocycling prop or check if timeout is 0?
+// TODO: add `nocycling` prop or check if `timeout` is 0?
 const Carousel = ({images, interval}) => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const setActiveNumber = useCallback(number => setActiveIndex(number - 1), [])
-  // it is expected to images prop to change rarely, not as activeIndex
-  // so, we can save some bits by memoizing prev/next callbacks, IMO this is premature now
+  // it is expected to images prop to change rarely, not as `activeIndex`
+  // so, we can save some bits by memoizing some callbacks, IMO this is premature now
   const setPreviousCallback = useCallback(
     () => setActiveIndex(previousIndex(images.length)),
     [images],
