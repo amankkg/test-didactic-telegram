@@ -1,6 +1,6 @@
 import React from 'react'
 
-import IndicatorBar from './indicator-bar'
+import {render} from 'test-utils'
 
 describe('IndicatorBar', () => {
   it.todo('should render exact given number of bullets')

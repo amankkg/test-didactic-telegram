@@ -1,19 +1,34 @@
 import React, {useMemo} from 'react'
 import PropTypes from 'prop-types'
+import {styled} from 'linaria/react'
 
 import {Bullet} from '../atoms/bullet'
 import {getNumbersArray} from '../misc-fns'
 
-const IndicatorBar = ({total, active, onClick, ...rootDivProps}) => {
+const Root = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const Indicator = styled(Bullet)`
+  width: 18px;
+  height: 18px;
+  margin-left: 4px;
+  margin-right: 4px;
+`
+
+const IndicatorBar = ({total, active, onClick, ...divProps}) => {
   // we can save on array creation since it is expected to `total` prop to change not so frequently
   const numbers = useMemo(() => getNumbersArray(total), [total])
 
   return (
-    <div {...rootDivProps}>
+    <Root {...divProps}>
       {numbers.map(n => (
-        <Bullet key={n} onClick={() => onClick(n)} active={active === n} />
+        <Indicator key={n} onClick={() => onClick(n)} active={active === n} />
       ))}
-    </div>
+    </Root>
   )
 }
 
