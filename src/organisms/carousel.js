@@ -37,8 +37,8 @@ const FooterBar = styled(IndicatorBar)`
   height: 48px;
 `
 
-// TODO: add transition animation
-// TODO: reset/pause timer: should be easier to do with external state manager (i.e. effector) and it would also unbloat this component
+// TODO: [UI] transition animation: using keyframes + transform/translateX should be enough also next/perv image needs to be rendered too
+// TODO: [UX] reset/pause timer on user interaction: should be easier to do with external state manager (i.e. effector) and it would also unbloat this component
 const Carousel = ({images, interval, ...divProps}) => {
   const [activeIndex, setActiveIndex] = useState(0)
   // it is expected to images prop to change rarely, not as `activeIndex`

@@ -1,6 +1,6 @@
 # test-didactic-telegram
 
-Frontend of test app. Built using React, Babel, Linaria, Yarn and Parcel.
+Frontend of test app. Built using React, Babel, [Linaria](https://linaria.now.sh/), Yarn and Parcel by principles of [Atomic Design](http://atomicdesign.bradfrost.com/table-of-contents/).
 
 Scripts (e.g. `yarn SCRIPT` or `npm run SCRIPT`):
 
@@ -11,6 +11,8 @@ Scripts (e.g. `yarn SCRIPT` or `npm run SCRIPT`):
 - `lint:css` - to run CSS-in-JS linter
 
 See `./package.json` for details.
+
+TODOs: slide animations, higher-level tests (for organisms and molecules)
 
 ---
 
