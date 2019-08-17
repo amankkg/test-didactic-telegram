@@ -16,8 +16,8 @@ const PreviousButton = styled(ArrowButton)`
   top: 50%;
   left: 7%;
   transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
 `
 
 const NextButton = styled(ArrowButton)`
@@ -25,8 +25,8 @@ const NextButton = styled(ArrowButton)`
   top: 50%;
   left: 93%;
   transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
 `
 
 const FooterBar = styled(IndicatorBar)`
@@ -34,16 +34,13 @@ const FooterBar = styled(IndicatorBar)`
   top: 93%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 50px;
+  height: 48px;
 `
 
-// TODO: add animation
-// TODO: reset timer on manual navigation? should be easier with external state manager (i.e. effector)
-// TODO: add `nocycling` prop or check if `timeout` is 0?
-const Carousel = ({images, interval, ...rootDivProps}) => {
+// TODO: add transition animation
+// TODO: reset/pause timer: should be easier to do with external state manager (i.e. effector) and it would also unbloat this component
+const Carousel = ({images, interval, ...divProps}) => {
   const [activeIndex, setActiveIndex] = useState(0)
-
-  const setActiveNumber = useCallback(number => setActiveIndex(number - 1), [])
   // it is expected to images prop to change rarely, not as `activeIndex`
   // so, we can save some bits by memoizing some callbacks, IMO this is premature now
   const setPreviousCallback = useCallback(
@@ -54,6 +51,7 @@ const Carousel = ({images, interval, ...rootDivProps}) => {
     () => setActiveIndex(nextIndex(images.length)),
     [images],
   )
+  const setActiveNumber = useCallback(number => setActiveIndex(number - 1), [])
 
   useEffect(() => {
     const intervalHandler = setInterval(setNextCallback, interval)
@@ -64,7 +62,7 @@ const Carousel = ({images, interval, ...rootDivProps}) => {
   const {url, note} = images[activeIndex]
 
   return (
-    <Root {...rootDivProps}>
+    <Root {...divProps}>
       <img src={url} alt={note} />
       <PreviousButton direction="left" onClick={setPreviousCallback} />
       <NextButton direction="right" onClick={setNextCallback} />
