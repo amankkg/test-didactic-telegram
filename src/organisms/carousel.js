@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react'
 import PropTypes from 'prop-types'
 import {styled} from 'linaria/react'
 
-import {SliderButton} from '../atoms/slider-button'
+import {CarouselButton} from '../molecules/carousel-button'
 import {IndicatorBar} from '../molecules/indicator-bar'
 import {nextIndex, previousIndex} from '../misc-fns'
 
@@ -11,31 +11,36 @@ const Root = styled.div`
   margin: auto;
 `
 
-const PreviousSlideButton = styled(SliderButton)`
+const LeftsideButton = styled(CarouselButton)`
   position: absolute;
   top: 50%;
   left: 7%;
   transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
 `
 
-const NextSlideButton = styled(SliderButton)`
+const RightsideButton = styled(CarouselButton)`
   position: absolute;
   top: 50%;
   left: 93%;
   transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
 `
 
-const IndicatorFooter = styled(IndicatorBar)`
+const FooterBar = styled(IndicatorBar)`
   position: absolute;
   top: 93%;
   left: 50%;
   transform: translate(-50%, -50%);
+  height: 50px;
 `
 
 // TODO: add animation
 // TODO: reset timer on manual navigation? should be easier with external state manager (i.e. effector)
 // TODO: add `nocycling` prop or check if `timeout` is 0?
-const Carousel = ({images, interval}) => {
+const Carousel = ({images, interval, ...rootDivProps}) => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const setActiveNumber = useCallback(number => setActiveIndex(number - 1), [])
@@ -59,11 +64,11 @@ const Carousel = ({images, interval}) => {
   const {url, note} = images[activeIndex]
 
   return (
-    <Root>
+    <Root {...rootDivProps}>
       <img src={url} alt={note} />
-      <PreviousSlideButton direction="left" onClick={setPreviousCallback} />
-      <NextSlideButton direction="right" onClick={setNextCallback} />
-      <IndicatorFooter
+      <LeftsideButton direction="prev" onClick={setPreviousCallback} />
+      <RightsideButton direction="next" onClick={setNextCallback} />
+      <FooterBar
         total={images.length}
         active={activeIndex + 1}
         onClick={setActiveNumber}

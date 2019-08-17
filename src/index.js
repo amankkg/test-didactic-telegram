@@ -11,19 +11,19 @@ const H = 490
 const images = [
   {
     url: `https://picsum.photos/id/400/${W}/${H}`,
-    note: 'not a cat #1',
+    note: 'plant',
   },
   {
-    url: `https://picsum.photos/id/401/${W}/${H}`,
-    note: 'not a cat #2',
+    url: `https://picsum.photos/id/409/${W}/${H}`,
+    note: 'town',
   },
   {
     url: `https://picsum.photos/id/403/${W}/${H}`,
-    note: 'not a cat #3',
+    note: 'retro',
   },
   {
     url: `https://picsum.photos/id/404/${W}/${H}`,
-    note: 'not a cat #4',
+    note: 'cliff',
   },
 ]
 
