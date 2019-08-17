@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react'
 import PropTypes from 'prop-types'
 import {styled} from 'linaria/react'
 
-import {CarouselButton} from '../molecules/carousel-button'
+import {ArrowButton} from '../atoms/arrow-button'
 import {IndicatorBar} from '../molecules/indicator-bar'
 import {nextIndex, previousIndex} from '../misc-fns'
 
@@ -11,7 +11,7 @@ const Root = styled.div`
   margin: auto;
 `
 
-const LeftsideButton = styled(CarouselButton)`
+const PreviousButton = styled(ArrowButton)`
   position: absolute;
   top: 50%;
   left: 7%;
@@ -20,7 +20,7 @@ const LeftsideButton = styled(CarouselButton)`
   height: 50px;
 `
 
-const RightsideButton = styled(CarouselButton)`
+const NextButton = styled(ArrowButton)`
   position: absolute;
   top: 50%;
   left: 93%;
@@ -66,8 +66,8 @@ const Carousel = ({images, interval, ...rootDivProps}) => {
   return (
     <Root {...rootDivProps}>
       <img src={url} alt={note} />
-      <LeftsideButton direction="prev" onClick={setPreviousCallback} />
-      <RightsideButton direction="next" onClick={setNextCallback} />
+      <PreviousButton direction="left" onClick={setPreviousCallback} />
+      <NextButton direction="right" onClick={setNextCallback} />
       <FooterBar
         total={images.length}
         active={activeIndex + 1}
