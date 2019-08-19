@@ -4,7 +4,7 @@ import {css} from 'linaria'
 import {styled} from 'linaria/react'
 import cx from 'classnames'
 
-import {getAnimationParameterX} from '../misc-fns'
+import {getAnimationParameterX, usePrevious} from '../misc-fns'
 
 const Root = styled.div`
   position: relative;
@@ -49,7 +49,9 @@ const inactive = css`
 
 // TODO: animation on slide jump
 const ImageSlider = ({images, current, transitionSpeed, ...divProps}) => {
-  const {in: _in, out} = getAnimationParameterX(-1, current) // TODO: track prevoius index
+  const previousValue = usePrevious(current)
+  const previous = isNaN(previousValue) ? -1 : previousValue
+  const {in: _in, out} = getAnimationParameterX(previous, current)
 
   const renderImage = ({className, style, ...props}, index) => {
     const isCurrent = index === current

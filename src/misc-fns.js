@@ -1,3 +1,5 @@
+import {useEffect, useRef} from 'react'
+
 // Usually, there are some given array with fixed length and frequently changing current index
 // in such cases we don't have to pass array length on every index change
 // so, both functions below are curried (more stable parameter comes first)
@@ -32,4 +34,19 @@ export const getAnimationParameterX = (fromIndex, toIndex) => {
     in: {fromX: ascending ? RIGHT : LEFT, toX: CENTER},
     out: {fromX: CENTER, toX: ascending ? LEFT : RIGHT},
   }
+}
+
+// source https://usehooks.com/usePrevious/
+export function usePrevious(value) {
+  // The ref object is a generic container whose current property is mutable ...
+  // ... and can hold any value, similar to an instance property on a class
+  const ref = useRef()
+
+  // Store current value in ref
+  useEffect(() => {
+    ref.current = value
+  }, [value]) // Only re-run if value changes
+
+  // Return previous value (happens before update in useEffect above)
+  return ref.current
 }
