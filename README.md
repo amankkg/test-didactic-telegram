@@ -12,7 +12,7 @@ Scripts (e.g. `yarn SCRIPT` or `npm run SCRIPT`):
 
 See `./package.json` for details.
 
-TODOs: slide animations, higher-level tests (for organisms and molecules)
+TODOs: slide-out animation, higher-level tests (for organisms and molecules)
 
 ---
 

@@ -61,7 +61,7 @@ const Carousel = ({images, interval, ...divProps}) => {
     return () => clearInterval(intervalHandler)
   }, [])
 
-  const transitionSpeed = Math.max(interval / 2, 1000)
+  const transitionSpeed = Math.min(interval / 2, 1000)
 
   return (
     <Root {...divProps}>
