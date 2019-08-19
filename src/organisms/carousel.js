@@ -4,6 +4,7 @@ import {styled} from 'linaria/react'
 
 import {ArrowButton} from '../atoms/arrow-button'
 import {IndicatorBar} from '../molecules/indicator-bar'
+import {ImageSlider} from '../molecules/image-slider'
 import {nextIndex, previousIndex} from '../misc-fns'
 
 const Root = styled.div`
@@ -37,7 +38,8 @@ const FooterBar = styled(IndicatorBar)`
   height: 48px;
 `
 
-// TODO: [UI] transition animation: using keyframes + transform/translateX should be enough also next/perv image needs to be rendered too
+const imageToSlide = image => ({src: image.url, alt: image.note})
+
 // TODO: [UX] reset/pause timer on user interaction: should be easier to do with external state manager (i.e. effector) and it would also unbloat this component
 const Carousel = ({images, interval, ...divProps}) => {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -59,11 +61,15 @@ const Carousel = ({images, interval, ...divProps}) => {
     return () => clearInterval(intervalHandler)
   }, [])
 
-  const {url, note} = images[activeIndex]
+  const transitionSpeed = Math.max(interval / 2, 1000)
 
   return (
     <Root {...divProps}>
-      <img src={url} alt={note} />
+      <ImageSlider
+        images={images.map(imageToSlide)}
+        current={activeIndex}
+        transitionSpeed={transitionSpeed}
+      />
       <PreviousButton direction="left" onClick={setPreviousCallback} />
       <NextButton direction="right" onClick={setNextCallback} />
       <FooterBar

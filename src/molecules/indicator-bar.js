@@ -26,7 +26,12 @@ const IndicatorBar = ({total, active, onClick, ...divProps}) => {
   return (
     <Root {...divProps}>
       {numbers.map(n => (
-        <Indicator key={n} onClick={() => onClick(n)} active={active === n} />
+        <Indicator
+          key={n}
+          active={active === n}
+          onClick={() => onClick(n)}
+          tabIndex={0}
+        />
       ))}
     </Root>
   )
