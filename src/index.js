@@ -36,7 +36,7 @@ const Root = styled.div`
 
 render(
   <Root>
-    <Carousel images={images} interval={1337} />
+    <Carousel images={images} interval={2500} />
     <Hr />
   </Root>,
   document.querySelector('#root'),

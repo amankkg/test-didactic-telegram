@@ -4,6 +4,8 @@ import {css} from 'linaria'
 import {styled} from 'linaria/react'
 import cx from 'classnames'
 
+import {getAnimationParameterX} from '../misc-fns'
+
 const Root = styled.div`
   position: relative;
   width: 1080px;
@@ -14,29 +16,56 @@ const Root = styled.div`
 
 const Image = styled.img`
   position: absolute;
-  display: none;
 `
 
 const active = css`
-  display: block;
-  animation: slide-in var(--animation-duration) forwards;
+  animation: slide-in var(--duration) forwards;
 
   @keyframes slide-in {
     0% {
-      transform: translateX(100%);
+      transform: translateX(var(--from));
     }
 
     100% {
-      transform: translateX(0%);
+      transform: translateX(var(--to));
     }
   }
 `
 
-// TODO: useRef to animate previous active item slide out
+const inactive = css`
+  animation: slide-out var(--duration) forwards;
+
+  @keyframes slide-out {
+    0% {
+      transform: translateX(var(--from));
+    }
+
+    100% {
+      transform: translateX(var(--to));
+      display: none;
+    }
+  }
+`
+
+// TODO: animation on slide jump
 const ImageSlider = ({images, current, transitionSpeed, ...divProps}) => {
-  const renderImage = ({className, style = {}, ...props}, index) => {
-    props.className = cx(className, {[active]: index === current})
-    props.style = {...style, '--animation-duration': transitionSpeed + 'ms'}
+  const {in: _in, out} = getAnimationParameterX(-1, current) // TODO: track prevoius index
+
+  const renderImage = ({className, style, ...props}, index) => {
+    const isCurrent = index === current
+    const {fromX, toX} = isCurrent ? _in : out
+
+    props.className = cx(className, {
+      [inactive]: !isCurrent,
+      [active]: isCurrent,
+    })
+
+    props.style = {
+      ...(style || {}),
+      '--from': fromX + '%',
+      '--to': toX + '%',
+      '--duration': transitionSpeed + 'ms',
+    }
 
     return <Image key={index + props.src} {...props} />
   }

@@ -18,3 +18,18 @@ export const previousIndex = length => currentIndex => {
 // we want to deal with numbers (1 .. total) not indices (0 .. total-1)
 // also, this is a way to prevent react's array-index-as-a-key warning
 export const getNumbersArray = length => Array.from({length}, (_, i) => i + 1)
+
+// horizontal constants
+const RIGHT = 100
+const CENTER = 0
+const LEFT = -100
+
+// animation parameters include directions for current and previous slides
+export const getAnimationParameterX = (fromIndex, toIndex) => {
+  const ascending = toIndex > fromIndex
+
+  return {
+    in: {fromX: ascending ? RIGHT : LEFT, toX: CENTER},
+    out: {fromX: CENTER, toX: ascending ? LEFT : RIGHT},
+  }
+}
